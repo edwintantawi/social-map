@@ -1,7 +1,10 @@
 import express from 'express';
-import threadRouters from './routers/threads.router.js';
 
-const PORT = 5000;
+// config
+import { serverOptions } from './config/index.js';
+
+// routers
+import threadRouters from './routers/threads.router.js';
 
 const app = express();
 
@@ -11,6 +14,6 @@ app.get('/', (_, res) => res.json({ message: 'ok' }));
 
 app.use('/threads', threadRouters);
 
-app.listen(PORT, () => {
-  console.log(`Server start at http://localhost:${PORT}`);
+app.listen(serverOptions.port, () => {
+  console.log(`Server start at http://localhost:${serverOptions.port}`);
 });
