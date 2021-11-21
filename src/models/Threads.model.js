@@ -1,49 +1,49 @@
 import mysql from 'mysql2';
-import dotenv from 'dotenv';
 import { nanoid } from 'nanoid';
-
-dotenv.config();
+import { mysqlDatabaseOptions } from '../config/index.js';
+import { NotFoundError } from '../exceptions/NotFoundError.js';
 
 class ThreadsModel {
   constructor() {
-    this._db = mysql.createConnection({
-      host: process.env.MYSQL_HOST,
-      user: process.env.MYSQL_USER,
-      password: process.env.MYSQL_PASSWORD,
-      database: process.env.MYSQL_DATABASE,
-    });
+    this._db = mysql.createPool(mysqlDatabaseOptions).promise();
   }
 
-  addThread({ caption }) {
-    return new Promise((resolve, reject) => {
-      const id = `thread-${nanoid(16)}`;
+  async addThread({ caption, latitude, longitude }) {
+    const id = `thread-${nanoid(16)}`;
 
-      const SQL = this._db.format(
-        `INSERT INTO threads (id, caption)
-        VALUES (?, ?)`,
-        [id, caption]
-      );
+    const SQL = this._db.format(
+      `INSERT INTO threads (id, caption, latitude ,longitude)
+        VALUES (?, ?, ?, ?)`,
+      [id, caption, latitude, longitude]
+    );
 
-      this._db.query(SQL, (error) => {
-        if (error) {
-          reject(new Error('Thread failed to add'));
-        }
-        resolve(id);
-      });
-    });
+    await this._db.query(SQL);
+    return id;
   }
 
-  getThreads() {
-    return new Promise((resolve, reject) => {
-      const SQL = 'SELECT * FROM threads';
+  async getThreads() {
+    const SQL = `SELECT * 
+                  FROM threads`;
 
-      this._db.query(SQL, (error, results) => {
-        if (error) {
-          reject(new Error('Thread failed to get'));
-        }
-        resolve(results);
-      });
-    });
+    const [rows] = await this._db.query(SQL);
+    return rows;
+  }
+
+  async getThreadsById(id) {
+    const SQL = this._db.format(
+      `SELECT *
+      FROM threads
+      WHERE id = ?`,
+      [id]
+    );
+
+    const [rows] = await this._db.query(SQL);
+
+    if (!rows.length) {
+      throw new NotFoundError('Thread not found');
+    }
+
+    return rows[0];
   }
 }
 
