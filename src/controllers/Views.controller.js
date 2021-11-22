@@ -4,7 +4,7 @@ class ViewsController {
   getHomePage(_, res) {
     const SERVER = getEnv('SERVER');
     const MAPBOX_TOKEN = getEnv('MAPBOX_TOKEN');
-    res.render('index', { SERVER, MAPBOX_TOKEN });
+    res.render('home', { SERVER, MAPBOX_TOKEN });
   }
 }
 
