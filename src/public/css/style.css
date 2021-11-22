@@ -1,0 +1,51 @@
+:root {
+  --black: #424242;
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+  color: var(--black);
+}
+
+.container {
+  max-width: 450px;
+  margin: 0 auto;
+  border: 1px solid gray;
+}
+
+.thread {
+  padding: 16px;
+}
+
+.thread__header {
+  display: flex;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user__avatar {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 1px solid gray;
+  border-radius: 50%;
+  margin-right: 14px;
+}
+
+.user__username {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.user__location {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.thread__caption {
+  font-size: 14px;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css"
+      integrity="sha512-wpPYUAdjBVSE4KJnH1VR1HeZfpl1ub8YT/NKx4PuQ5NmX2tKuGu6U/JRp5y+Y8XG2tV+wKQpNHVUX03MfMFn9Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Social Media</title>
+  </head>
+  <body>
+    <div class="container" id="threads-container"></div>
+
+    <script>
+      const SERVER = '<%= SERVER %>';
+
+      const threadsContainer = document.getElementById('threads-container');
+
+      const getThreats = async () => {
+        try {
+          const response = await fetch(`${SERVER}/threads`);
+
+          if (response.status !== 200) {
+            throw new Error('Failed to fetch');
+          }
+
+          const responseJson = await response.json();
+
+          return responseJson.data;
+        } catch (error) {
+          console.log(error);
+          return [];
+        }
+      };
+
+      const start = async () => {
+        const { threads } = await getThreats();
+        let template = '';
+
+        threads.forEach((thread) => {
+          template += `
+            <article class="thread">
+              <div class="thread__header">
+                <img
+                  src="https://avatars.dicebear.com/api/adventurer/your-cdsafsdfustom-seed.svg"
+                  alt=""
+                  class="user__avatar"
+                />
+                <div class="wrapper">
+                  <div class="user__username">Guest's</div>
+                  <div class="user__location">Medan, Indonesia</div>
+                </div>
+              </div>
+
+              <p class="thread__caption">
+                ${thread.caption}
+              </p>
+            </article>
+          `;
+        });
+
+        threadsContainer.innerHTML = template;
+      };
+
+      start();
+    </script>
+  </body>
+</html>
