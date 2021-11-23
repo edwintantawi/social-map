@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css"
-      integrity="sha512-wpPYUAdjBVSE4KJnH1VR1HeZfpl1ub8YT/NKx4PuQ5NmX2tKuGu6U/JRp5y+Y8XG2tV+wKQpNHVUX03MfMFn9Q=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="/css/style.css" />
-    <title>Social Media</title>
+    <%- include('partials/head') %>
+    <title>SocialMap</title>
   </head>
   <body>
-    <div class="container" id="threads-container"></div>
+    <!-- HEADER:START -->
+    <header class="container header">
+      <a href="#">
+        <img src="/assets/icons/camera.svg" alt="" class="icon" />
+      </a>
+      <a href="#">
+        <img src="/assets/icons/message.svg" alt="" class="icon" />
+      </a>
+    </header>
+    <!-- HEADER:END -->
+
+    <!-- NAVIGATION:START -->
+    <%- include('partials/navigation', {active: 'home'}) %>
+    <!-- NAVIGATION:END -->
+
+    <!-- MAIN:START -->
+    <main class="container" id="threads-container"></main>
+    <!-- MAIN:END -->
 
     <script>
       const SERVER = '<%= SERVER %>';
@@ -47,36 +46,59 @@
         }
       };
 
-      const start = async () => {
+      const createThreadTemplate = (thread) => {
+        return `
+        <article class="thread">
+          <header class="thread__header">
+            <img
+              src="https://avatars.dicebear.com/api/avataaars/ewdswjkdslao.svg?b=%23b3f0ff"
+              alt=""
+              class="thread__avatar"
+            />
+            <div class="thread__user">
+              <span>Guests</span>
+              <p>Medan, Indonesia</p>
+            </div>
+            <div class="thread__menu">
+              <!-- <img src="assets/icons/more-circle.svg" alt="" class="icon" /> -->
+            </div>
+          </header>
+          <div class="thread__body">
+            <img
+              src="https://source.unsplash.com/random"
+              alt=""
+              class="thread__picture"
+            />
+
+            <p class="thread__caption truncate">
+              ${thread.caption}
+            </p>
+            <!-- <span class="read-caption">Read more</span> -->
+          </div>
+          <div class="thread__footer">
+            <div>
+              <img src="/assets/icons/heart.svg" alt="" class="icon" />
+              <img src="/assets/icons/bookmark.svg" alt="" class="icon" />
+            </div>
+            <div>
+              <img src="/assets/icons/chat.svg" alt="" class="icon" />
+            </div>
+          </div>
+        </article>
+        `;
+      };
+
+      const init = async () => {
         const { threads } = await getThreats();
         let template = '';
-
         threads.forEach((thread) => {
-          template += `
-            <article class="thread">
-              <div class="thread__header">
-                <img
-                  src="https://avatars.dicebear.com/api/adventurer/your-cdsafsdfustom-seed.svg"
-                  alt=""
-                  class="user__avatar"
-                />
-                <div class="wrapper">
-                  <div class="user__username">Guest's</div>
-                  <div class="user__location">Medan, Indonesia</div>
-                </div>
-              </div>
-
-              <p class="thread__caption">
-                ${thread.caption}
-              </p>
-            </article>
-          `;
+          template += createThreadTemplate(thread);
         });
 
         threadsContainer.innerHTML = template;
       };
 
-      start();
+      init();
     </script>
   </body>
 </html>

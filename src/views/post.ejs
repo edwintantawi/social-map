@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/head') %>
+    <link rel="stylesheet" href="/css/post.css" />
+    <title>Social Media</title>
+  </head>
+  <body>
+    <!-- HEADER:START -->
+    <header class="container header">
+      <a href="#">
+        <img src="./assets/icons/camera.svg" alt="" class="icon" />
+      </a>
+      <a href="#">
+        <img src="./assets/icons/message.svg" alt="" class="icon" />
+      </a>
+    </header>
+    <!-- HEADER:END -->
+
+    <!-- NAVIGATION:START -->
+    <%- include('partials/navigation', {active: 'post'})%>
+    <!-- NAVIGATION:END -->
+
+    <!-- MAIN:START -->
+    <main class="container">
+      <form id="form" enctype="multipart/form-data">
+        <label for="picture" class="picture__label" id="picture__preview">
+          <div>
+            <img src="./assets/icons/upload.svg" alt="" class="icon" />
+            <p>Upload Picture</p>
+          </div>
+        </label>
+        <input
+          type="file"
+          id="picture"
+          class="picture__input"
+          accept="image/*"
+          name="picture"
+          required
+        />
+        <label for="caption" class="caption__label">
+          <textarea
+            id="caption"
+            name="caption"
+            class="input"
+            rows="8"
+            placeholder="Caption..."
+            required
+          ></textarea>
+        </label>
+        <button type="submit" class="submit">Post</button>
+      </form>
+    </main>
+    <!-- MAIN:END -->
+
+    <script>
+      const pictureUploader = document.getElementById('picture');
+      const picturePreview = document.getElementById('picture__preview');
+
+      pictureUploader.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          picturePreview.style.backgroundImage = `url(${e.target.result})`;
+          picturePreview.innerHTML = '';
+          picturePreview.style.border = 'none';
+        };
+
+        reader.readAsDataURL(file);
+      });
+
+      const form = document.getElementById('form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const response = await fetch('/threads', {
+          method: 'POST',
+          body: formData,
+        });
+        if (response.status === 201) {
+          window.location.href = '/';
+        } else {
+          alert('Post fail, try again');
+        }
+      });
+    </script>
+  </body>
+</html>
