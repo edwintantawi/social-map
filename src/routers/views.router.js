@@ -6,6 +6,6 @@ const router = express.Router();
 const viewsController = new ViewsController();
 
 router.get('/', viewsController.getHomePage);
-router.get('/post', (_, res) => res.render('post'));
+router.get('/post', viewsController.getPostPage);
 
 export default router;

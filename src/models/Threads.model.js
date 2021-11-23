@@ -8,13 +8,13 @@ class ThreadsModel {
     this._db = mysql.createPool(mysqlDatabaseOptions).promise();
   }
 
-  async addThread({ caption, latitude, longitude }) {
+  async addThread({ caption, pictureUrl, location, latitude, longitude }) {
     const id = `thread-${nanoid(16)}`;
 
     const SQL = this._db.format(
-      `INSERT INTO threads (id, caption, latitude ,longitude)
-        VALUES (?, ?, ?, ?)`,
-      [id, caption, latitude, longitude]
+      `INSERT INTO threads (id, caption, picture_url, location, latitude ,longitude)
+        VALUES (?, ?, ?, ?, ?, ?)`,
+      [id, caption, pictureUrl, location, latitude, longitude]
     );
 
     await this._db.query(SQL);

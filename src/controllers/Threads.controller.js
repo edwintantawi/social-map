@@ -1,20 +1,30 @@
 import { ClientError } from '../exceptions/ClientError.js';
 
 class ThreadsController {
-  constructor(models, validator) {
-    this._models = models;
-    this._validator = validator;
+  constructor({ threadsModel, storageService, threadValidators }) {
+    this._models = threadsModel;
+    this._storageService = storageService;
+    this._validator = threadValidators;
 
     this.postThreadHandler = this.postThreadHandler.bind(this);
     this.getThreadsHandler = this.getThreadsHandler.bind(this);
     this.getThreadsByIdHandler = this.getThreadsByIdHandler.bind(this);
   }
 
-  async postThreadHandler({ body }, res) {
+  async postThreadHandler({ body, file }, res) {
     try {
       this._validator.validatePostThreadPayload(body);
 
-      const threadId = await this._models.addThread(body);
+      const { url } = await this._storageService.upload(file);
+
+      const newBody = {
+        ...body,
+        pictureUrl: url,
+        latitude: body.latitude === '' ? null : body.latitude,
+        longitude: body.longitude === '' ? null : body.longitude,
+      };
+
+      const threadId = await this._models.addThread(newBody);
 
       res.status(201);
       return res.json({
@@ -29,6 +39,8 @@ class ThreadsController {
           message: error.message,
         });
       }
+
+      console.log(error);
 
       // server error
       res.status(500);
