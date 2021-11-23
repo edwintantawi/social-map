@@ -85,6 +85,10 @@ a {
   padding: 0.8rem 0;
 }
 
+#threads-container {
+  margin-bottom: 130px;
+}
+
 .thread__header {
   display: flex;
   gap: 1rem;
@@ -195,6 +199,10 @@ a {
   height: 24px;
 }
 
+#mapbox-container {
+  padding: 0;
+}
+
 .map {
   width: 100%;
   height: calc(100vh - 62px - 72px);
@@ -203,4 +211,42 @@ a {
 
 .map .mapboxgl-canvas {
   width: 100%;
+}
+
+.marker {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.marker__thread {
+  background-color: purple;
+  border: 6px solid var(--purple);
+}
+
+.popup {
+  background-color: transparent;
+}
+
+.popup p {
+  margin: 0;
+}
+
+.popup img {
+  width: 100%;
+  aspect-ratio: 2/1;
+  border-radius: 0.8rem;
+}
+
+.popup .mapboxgl-popup-content {
+  padding: 1rem;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: none;
+}
+
+.notfound {
+  text-align: center;
+  padding: 3rem 0;
 }

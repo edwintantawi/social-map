@@ -1,5 +1,6 @@
 {
   "env": {
+    "browser": true,
     "es2021": true,
     "node": true
   },
@@ -14,6 +15,7 @@
     "import/extensions": "off",
     "import/prefer-default-export": "off",
     "no-underscore-dangle": "off",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "no-alert": "off"
   }
 }

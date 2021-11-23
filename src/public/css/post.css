@@ -74,6 +74,10 @@ textarea.input:focus {
   color: white;
 }
 
+.submit:disabled {
+  background-color: #b688ff7a;
+}
+
 #location {
   display: none;
 }
