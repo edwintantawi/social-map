@@ -32,6 +32,10 @@ a {
   height: 30px;
 }
 
+.hidden {
+  display: none;
+}
+
 .container {
   max-width: 540px;
   margin: 0 auto;
@@ -146,9 +150,57 @@ a {
 .thread__footer {
   display: flex;
 }
+
 .thread__footer div:first-child {
   flex: 1;
 }
+
 .thread__footer img {
   margin: 0 0.3rem;
+}
+
+.mode__wrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 84px;
+  z-index: 9;
+}
+
+.mode {
+  display: flex;
+  justify-content: center;
+}
+
+.mode button {
+  padding: 0.5rem 1.4rem;
+  border: 4px solid var(--purple);
+  cursor: pointer;
+  background-color: var(--dark-purple);
+  border-radius: 99px;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  column-gap: 4px;
+  align-items: center;
+  transition: 400ms;
+}
+
+.mode__toggle:active {
+  transform: scale(0.94);
+}
+
+.mode__toggle img {
+  width: 24px;
+  height: 24px;
+}
+
+.map {
+  width: 100%;
+  height: calc(100vh - 62px - 72px);
+  background-color: var(--purple);
+}
+
+.map .mapboxgl-canvas {
+  width: 100%;
 }
