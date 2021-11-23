@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 21, 2021 at 06:41 PM
+-- Generation Time: Nov 23, 2021 at 06:11 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `social_media`
+-- Database: `social_map`
 --
 
 -- --------------------------------------------------------
@@ -30,8 +30,10 @@ SET time_zone = "+00:00";
 CREATE TABLE `threads` (
   `id` varchar(64) NOT NULL,
   `caption` text NOT NULL,
-  `latitude` decimal(10,8) NOT NULL,
-  `longitude` decimal(11,8) NOT NULL,
+  `picture_url` text NOT NULL,
+  `location` text DEFAULT NULL,
+  `latitude` text DEFAULT NULL,
+  `longitude` text DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -40,9 +42,10 @@ CREATE TABLE `threads` (
 -- Dumping data for table `threads`
 --
 
-INSERT INTO `threads` (`id`, `caption`, `latitude`, `longitude`, `created_at`, `updated_at`) VALUES
-('thread-MrnwDE1xzilN_LRV', 'my first thread', '3.58809600', '98.68738560', '2021-11-21 22:53:17', '2021-11-21 22:53:17'),
-('thread-WOOiy4XfZLqTZqzr', 'my seconds thread', '3.48809600', '98.58738520', '2021-11-21 23:18:04', '2021-11-21 23:18:04');
+INSERT INTO `threads` (`id`, `caption`, `picture_url`, `location`, `latitude`, `longitude`, `created_at`, `updated_at`) VALUES
+('thread-abbqS2Ia87pUv26k', 'Microservices - also known as the microservice architecture - is an architectural style that structures an application as a collection of services that are', 'http://res.cloudinary.com/edwintantawi/image/upload/v1637687368/pictures/e0mgmvk4p2j39pdhpexq.jpg', 'Tanjung Morawa, Indonesia', '3.5159743', '98.7954551', '2021-11-24 00:09:29', '2021-11-24 00:09:29'),
+('thread-Nz6R7gBNNm7iejsa', 'learn from book is more powerfull then other media we can use for get information, try to use book as your window to knowladge. its be powerfull', 'http://res.cloudinary.com/edwintantawi/image/upload/v1637687254/pictures/cgjiopcjptffg4yhj5is.jpg', 'Medan Barat, Indonesia', '3.588096', '98.680832', '2021-11-24 00:07:35', '2021-11-24 00:07:35'),
+('thread-_dzvvN4bQSG0bUPF', 'Technolog has over 30 years experience in the design and manufacture of battery powered data loggers, electronic pressure controllers for water & gas distribution. Start search. Upcoming Events', 'http://res.cloudinary.com/edwintantawi/image/upload/v1637687440/pictures/vbera66hqniyu3cvoqgr.jpg', NULL, NULL, NULL, '2021-11-24 00:10:41', '2021-11-24 00:10:41');
 
 --
 -- Indexes for dumped tables

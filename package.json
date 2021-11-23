@@ -1,5 +1,5 @@
 {
-  "name": "social-media",
+  "name": "social-map",
   "version": "1.0.0",
   "description": "",
   "main": "src/app.js",
@@ -17,9 +17,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/edwintantawi/social-media/issues"
+    "url": "https://github.com/edwintantawi/social-map/issues"
   },
-  "homepage": "https://github.com/edwintantawi/social-media#readme",
+  "homepage": "https://github.com/edwintantawi/social-map#readme",
   "devDependencies": {
     "eslint": "^8.3.0",
     "eslint-config-airbnb-base": "^15.0.0",
