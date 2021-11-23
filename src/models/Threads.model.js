@@ -23,7 +23,8 @@ class ThreadsModel {
 
   async getThreads() {
     const SQL = `SELECT * 
-                  FROM threads`;
+                  FROM threads
+                  ORDER BY created_at DESC`;
 
     const [rows] = await this._db.query(SQL);
     return rows;
