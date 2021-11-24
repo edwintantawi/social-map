@@ -13,12 +13,36 @@ Sosial media berbasis map
 
 ## Setup Database
 
-- Database name: `social_map`
-- Database Table:
+- Nama Database: `social_map`
+- Tabel Database:
   - `threads`
 
-_Table migrations check `migrations` folders to import tables_
+_untuk melakukan migrasi tabel database silahkan import file SQL pada folder `migrations` ke DBMS_
 
 ## Enviroment variabels
 
-check `.env.example` file
+- buat file dengan nama `.env`
+- copy isi file `.env.example` ke file `.env`
+- isi value yang sesuai dengan konteks nya
+
+## Running app
+
+- jalankan `npm install` untuk menginstall semua package yang di perlukan
+- pastikan Database dan Enviroment variabel sudah di sesuaikan
+- jalankan `npm start` untuk menjalankan server, atau jika ingin menjalankan pada tahap development silahkan jalankan `npm run start:dev`
+- Silahkan buka pada browser url server yang sedang berjalan
+- Izinkan pengaksesan GPS untuk menggunakan fitur map agar berfungsi dengan baik.
+
+# Features
+
+- Menampilkan thread/post pada halaman home
+- Menambahkan thread/post
+  - Mencantumkan atau tidak lokasi user sekarang menggunakan GPS
+  - Menambahkan gambar
+  - Menambahkan caption
+- Menampilkan thread/post dalam bentuk map bagi yang mencantumkan lokasi
+  - Setiap thread/post pada map dapat di tekan untuk melihat thread/post
+
+# Credits
+
+- UI Design inspiration: https://dribbble.com/shots/15909980-Social-Media-App-Design-Concept/attachments/7739683?mode=media
