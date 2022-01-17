@@ -1,51 +1,41 @@
-import mysql from 'mysql2';
-import { nanoid } from 'nanoid';
-import { mysqlDatabaseOptions } from '../config/index.js';
-import { NotFoundError } from '../exceptions/NotFoundError.js';
+import { sequelize, DataTypes } from './index.js';
+import { User } from './Users.model.js';
 
-class ThreadsModel {
-  constructor() {
-    this._db = mysql.createPool(mysqlDatabaseOptions).promise();
-  }
+const Thread = sequelize.define('thread', {
+  id: {
+    type: DataTypes.STRING,
+    autoIncrement: false,
+    primaryKey: true,
+  },
+  caption: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  pictureUrl: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  location: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  latitude: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  longitude: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  userId: {
+    type: DataTypes.STRING,
+    references: {
+      model: User,
+      key: 'id',
+    },
+  },
+});
 
-  async addThread({ caption, pictureUrl, location, latitude, longitude }) {
-    const id = `thread-${nanoid(16)}`;
+Thread.belongsTo(User, { foreignKey: 'userId' });
 
-    const SQL = this._db.format(
-      `INSERT INTO threads (id, caption, picture_url, location, latitude ,longitude)
-        VALUES (?, ?, ?, ?, ?, ?)`,
-      [id, caption, pictureUrl, location, latitude, longitude]
-    );
-
-    await this._db.query(SQL);
-    return id;
-  }
-
-  async getThreads() {
-    const SQL = `SELECT * 
-                  FROM threads
-                  ORDER BY created_at DESC`;
-
-    const [rows] = await this._db.query(SQL);
-    return rows;
-  }
-
-  async getThreadsById(id) {
-    const SQL = this._db.format(
-      `SELECT *
-      FROM threads
-      WHERE id = ?`,
-      [id]
-    );
-
-    const [rows] = await this._db.query(SQL);
-
-    if (!rows.length) {
-      throw new NotFoundError('Thread not found');
-    }
-
-    return rows[0];
-  }
-}
-
-export { ThreadsModel };
+export { Thread };

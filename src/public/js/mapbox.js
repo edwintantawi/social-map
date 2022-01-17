@@ -25,7 +25,7 @@ const createMapBoxMarker = ({ map, classNames, center, popup }) => {
 const createMapBoxPopup = (thread) => {
   const popup = new mapboxgl.Popup({ className: 'popup' }).setHTML(
     `<div>
-        <img src="${thread.picture_url}" />
+        <img src="${thread.pictureUrl}" />
         <p>${thread.caption}</p>
       </div>`
   );

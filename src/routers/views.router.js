@@ -3,9 +3,7 @@ import { ViewsController } from '../controllers/Views.controller.js';
 
 const router = express.Router();
 
-const viewsController = new ViewsController();
-
-router.get('/', viewsController.getHomePage);
-router.get('/post', viewsController.getPostPage);
+router.get('/', ViewsController.getHomePage);
+router.get('/post', ViewsController.getPostPage);
 
 export default router;

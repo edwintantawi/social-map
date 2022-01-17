@@ -1,14 +1,18 @@
 import { getEnv } from '../config/index.js';
 
 class ViewsController {
-  getHomePage(_, res) {
+  static getHomePage(req, res) {
     const MAPBOX_TOKEN = getEnv('MAPBOX_TOKEN');
-    res.render('index', { MAPBOX_TOKEN });
+    res.render('index', { MAPBOX_TOKEN, user: req.user });
   }
 
-  getPostPage(_, res) {
-    const MAPBOX_TOKEN = getEnv('MAPBOX_TOKEN');
-    res.render('post', { MAPBOX_TOKEN });
+  static getPostPage(req, res) {
+    if (req.user) {
+      const MAPBOX_TOKEN = getEnv('MAPBOX_TOKEN');
+      res.render('post', { MAPBOX_TOKEN, user: req.user });
+    } else {
+      res.redirect('/');
+    }
   }
 }
 

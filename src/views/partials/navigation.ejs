@@ -14,13 +14,15 @@
         class="icon"
       />
     </a>
-    <a href="/post">
+
+    <a href="<%= user ? '/post' : '/auth/google' %> ">
       <img
         src="/assets/icons/plus<%= active === 'post' ? '-fill': '' %>.svg"
         alt="post"
         class="icon large-icon"
       />
     </a>
+
     <a href="#">
       <img
         src="/assets/icons/notification<%= active === 'notification' ? '-fill': '' %>.svg"
@@ -28,12 +30,24 @@
         class="icon"
       />
     </a>
-    <a href="#">
+
+    <% if (user) { %>
+    <a href="/auth/logout">
+      <img
+        src="<%= user.photo %> "
+        alt="<%= user.displayName %>"
+        class="icon"
+        style="border-radius: 99px"
+      />
+    </a>
+    <% } else { %>
+    <a href="/auth/google">
       <img
         src="/assets/icons/profile<%= active === 'profile' ? '-fill': '' %>.svg"
         alt=""
         class="icon"
       />
     </a>
+    <% } %>
   </nav>
 </div>

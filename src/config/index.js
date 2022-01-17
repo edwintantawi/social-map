@@ -15,8 +15,9 @@ export const serverOptions = {
 };
 
 export const mysqlDatabaseOptions = {
+  dialect: 'mysql',
   host: getEnv('MYSQL_HOST'),
-  user: getEnv('MYSQL_USER'),
+  username: getEnv('MYSQL_USER'),
   password: getEnv('MYSQL_PASSWORD'),
   database: getEnv('MYSQL_DATABASE'),
 };

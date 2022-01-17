@@ -46,8 +46,6 @@ form.addEventListener('submit', async (e) => {
   submitButton.innerText = 'Uploading...';
   submitButton.disabled = true;
   const formData = new FormData(e.target);
-  console.log(formData.get('latitude'));
-  console.log(formData.get('longitude'));
 
   const response = await fetch('/threads', {
     method: 'POST',

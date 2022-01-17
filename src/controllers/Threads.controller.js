@@ -1,35 +1,36 @@
+import { nanoid } from 'nanoid';
+
+import { Thread } from '../models/Threads.model.js';
 import { ClientError } from '../exceptions/ClientError.js';
+import { Cloudinary } from '../services/Cloudinary.js';
+import { threadValidators } from '../validators/threads/index.js';
+import { User } from '../models/Users.model.js';
 
+const storageService = new Cloudinary();
 class ThreadsController {
-  constructor({ threadsModel, storageService, threadValidators }) {
-    this._models = threadsModel;
-    this._storageService = storageService;
-    this._validator = threadValidators;
-
-    this.postThreadHandler = this.postThreadHandler.bind(this);
-    this.getThreadsHandler = this.getThreadsHandler.bind(this);
-    this.getThreadsByIdHandler = this.getThreadsByIdHandler.bind(this);
-  }
-
-  async postThreadHandler({ body, file }, res) {
+  static async postThreadHandler({ body, file, user }, res) {
     try {
-      this._validator.validatePostThreadPayload(body);
+      threadValidators.validatePostThreadPayload(body);
 
-      const { url } = await this._storageService.upload(file);
+      const { url } = await storageService.upload(file);
+
+      const id = `thread-${nanoid(16)}`;
 
       const newBody = {
         ...body,
+        id,
         pictureUrl: url,
         latitude: body.latitude === '' ? null : body.latitude,
         longitude: body.longitude === '' ? null : body.longitude,
+        userId: user.id,
       };
 
-      const threadId = await this._models.addThread(newBody);
+      const thread = await Thread.create(newBody);
 
       res.status(201);
       return res.json({
         status: 'success',
-        data: { threadId },
+        data: { threadId: thread.dataValues.id },
       });
     } catch (error) {
       if (error instanceof ClientError) {
@@ -40,8 +41,6 @@ class ThreadsController {
         });
       }
 
-      console.log(error);
-
       // server error
       res.status(500);
       return res.json({
@@ -51,42 +50,16 @@ class ThreadsController {
     }
   }
 
-  async getThreadsHandler(_, res) {
-    const threads = await this._models.getThreads();
+  static async getThreadsHandler(_, res) {
+    const threads = await Thread.findAll({
+      include: [{ model: User }],
+      order: [['createdAt', 'DESC']],
+    });
 
     return res.json({
       status: 'success',
       data: { threads },
     });
-  }
-
-  async getThreadsByIdHandler({ params }, res) {
-    try {
-      const { id } = params;
-
-      const thread = await this._models.getThreadsById(id);
-
-      return res.json({
-        status: 'success',
-        data: { thread },
-      });
-    } catch (error) {
-      if (error instanceof ClientError) {
-        res.status(error.statusCode);
-        return res.json({
-          status: 'fail',
-          message: error.message,
-        });
-      }
-
-      console.log(error);
-      // server error
-      res.status(500);
-      return res.json({
-        status: 'error',
-        message: 'Server error',
-      });
-    }
   }
 }
 
