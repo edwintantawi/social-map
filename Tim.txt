@@ -10,6 +10,12 @@ Tema/Topik    : Social media
 
 Deskripsi     : SocialMap merupakan sosial media berbasis map yang menyajikan cara baru untuk berbagi cerita, dengan menerapkan konsep map pada SocialMap user tidak hanya dapat scroll beranda mereka, namun kini user dapat berkeliling lokasi dengan map dan melihat thread/post pada lokasi yang ada.
 
+Fitur         : - Login dan logout dengan google
+                - menambahkan thread dengan atau tanpa lokasi
+                - Melihat semua thread (gambar, caption, user dan lokasi)
+                - melihat thread berdasarkan map
+                - melihat profile diri sendiri dan user lain
+
 Credits       : - UI Design inspiration: https://dribbble.com/shots/15909980-Social-Media-App-Design-Concept/attachments/7739683?mode=media
 
 Penggunaan    : pada file README.md

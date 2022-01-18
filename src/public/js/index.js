@@ -32,10 +32,12 @@ const createThreadTemplate = (thread) => `
               alt="${thread.user.displayName}"
               class="thread__avatar"
             />
-            <div class="thread__user">
+            <a href="/profile/${thread.user.id}" >
+              <div class="thread__user">
               <span>${thread.user.displayName}</span>
               <p>${thread.location || 'in internet'}</p>
-            </div>
+              </div>
+            </a>
             <div class="thread__menu">
               <!-- <img src="assets/icons/more-circle.svg" alt="" class="icon" /> -->
             </div>

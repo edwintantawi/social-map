@@ -32,21 +32,17 @@
     </a>
 
     <% if (user) { %>
-    <a href="/auth/logout">
+    <a href="/profile">
       <img
         src="<%= user.photo %> "
         alt="<%= user.displayName %>"
         class="icon"
-        style="border-radius: 99px"
+        style="border-radius: 99px; border: 2px solid #130f26"
       />
     </a>
     <% } else { %>
     <a href="/auth/google">
-      <img
-        src="/assets/icons/profile<%= active === 'profile' ? '-fill': '' %>.svg"
-        alt=""
-        class="icon"
-      />
+      <img src="/assets/icons/login.svg" alt="" class="icon" />
     </a>
     <% } %>
   </nav>

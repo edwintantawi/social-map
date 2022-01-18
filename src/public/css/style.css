@@ -111,6 +111,7 @@ a {
   font-size: 0.9rem;
   letter-spacing: 0.05rem;
   font-weight: bold;
+  color: var(--dark-purple);
 }
 
 .thread__user p {
@@ -176,7 +177,11 @@ a {
   justify-content: center;
 }
 
-.mode button {
+.mode-button > span {
+  font-size: 14px;
+}
+
+.mode-button {
   padding: 0.5rem 1.4rem;
   border: 4px solid var(--purple);
   cursor: pointer;

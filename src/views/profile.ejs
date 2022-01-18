@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/head') %>
+    <link rel="stylesheet" href="/css/profile.css" />
+    <!-- mapbox -->
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js"></script>
+
+    <title>SocialMap</title>
+  </head>
+  <body>
+    <!-- HEADER:START -->
+    <header class="container header">
+      <a href="#">
+        <img src="/assets/icons/camera.svg" alt="" class="icon" />
+      </a>
+      <a href="#">
+        <img src="/assets/icons/message.svg" alt="" class="icon" />
+      </a>
+    </header>
+    <!-- HEADER:END -->
+
+    <!-- NAVIGATION:START -->
+    <%- include('partials/navigation', {active: 'profile'}) %>
+    <!-- NAVIGATION:END -->
+
+    <!-- MAIN:START -->
+    <main class="main">
+      <% if (user.id === profileUser.id) { %>
+      <div class="mode__wrapper">
+        <div class="container mode">
+          <a href="/auth/logout" class="mode-button">
+            <img src="/assets/icons/logout.svg" alt="" /> <span>Logout</span>
+          </a>
+        </div>
+      </div>
+      <% } %>
+
+      <div class="container">
+        <div class="profile">
+          <img
+            src="<%= profileUser.photo %> "
+            alt="profile image"
+            class="profile__image"
+          />
+          <h1 class="profile__name"><%= profileUser.displayName %></h1>
+        </div>
+
+        <div class="post-list">
+          <% threads.forEach((thread) => { %>
+          <img src="<%= thread.pictureUrl %> " alt="" class="post" />
+          <% }) %>
+        </div>
+      </div>
+    </main>
+    <!-- MAIN:END -->
+  </body>
+</html>
