@@ -29,19 +29,34 @@ const picturePreview = document.getElementById('picture__preview');
 pictureUploader.addEventListener('change', (event) => {
   const file = event.target.files[0];
 
-  const reader = new FileReader();
-  reader.onload = (readerEvent) => {
-    picturePreview.style.backgroundImage = `url(${readerEvent.target.result})`;
-    picturePreview.innerHTML = '';
-    picturePreview.style.border = 'none';
-  };
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (readerEvent) => {
+      picturePreview.style.backgroundImage = `url(${readerEvent.target.result})`;
+      picturePreview.innerHTML = '';
+      picturePreview.style.border = 'none';
+    };
 
-  reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
+  } else {
+    picturePreview.style.backgroundImage = 'none';
+    picturePreview.innerHTML = `<div>
+            <img src="./assets/icons/upload.svg" alt="" class="icon" />
+            <p>Upload Picture</p>
+          </div>`;
+    picturePreview.style.border = '2px dashed var(--purple)';
+  }
 });
 
 const form = document.getElementById('form');
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
+
+  if (pictureUploader.files.length === 0) {
+    alert('Picture is required');
+    return;
+  }
+
   const submitButton = document.getElementById('submit-button');
   submitButton.innerText = 'Uploading...';
   submitButton.disabled = true;

@@ -31,6 +31,7 @@ const createThreadTemplate = (thread) => `
               src="${thread.user.photo}"
               alt="${thread.user.displayName}"
               class="thread__avatar"
+              referrerpolicy="no-referrer"
             />
             <a href="/profile/${thread.user.id}" >
               <div class="thread__user">

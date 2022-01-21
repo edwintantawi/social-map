@@ -8,7 +8,7 @@ const Thread = sequelize.define('thread', {
     primaryKey: true,
   },
   caption: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   pictureUrl: {

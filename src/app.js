@@ -56,8 +56,8 @@ app.get('/auth/logout', (req, res) => {
 });
 
 const syncTable = async () => {
-  await Thread.sync();
   await User.sync();
+  await Thread.sync();
 };
 
 syncTable()

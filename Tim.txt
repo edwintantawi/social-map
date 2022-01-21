@@ -10,11 +10,19 @@ Tema/Topik    : Social media
 
 Deskripsi     : SocialMap merupakan sosial media berbasis map yang menyajikan cara baru untuk berbagi cerita, dengan menerapkan konsep map pada SocialMap user tidak hanya dapat scroll beranda mereka, namun kini user dapat berkeliling lokasi dengan map dan melihat thread/post pada lokasi yang ada.
 
-Fitur         : - Login dan logout dengan google
-                - menambahkan thread dengan atau tanpa lokasi
-                - Melihat semua thread (gambar, caption, user dan lokasi)
-                - melihat thread berdasarkan map
-                - melihat profile diri sendiri dan user lain
+Fitur         : 
+    - Login dan logout dengan passport google authentication '/auth/google' dan logout pada menu di '/profile' atau '/auth/logout'
+
+    - menambahkan thread pada '/post' dengan mencantumkan gambar, caption, dan location jika di inginkan
+
+    - Melihat semua thread (gambar, caption, user dan lokasi) '/'
+
+    - user dapat melihat profile dari user yang ada di home page '/'
+
+    - melihat thread berdasarkan map '/' dan menekan tombol map dan menekan kembali tombol home untuk ke tampilan semula, pada mode map user dapat melihat lokasi lokasi untuk post yang menyertakan lokasi dan dapat ditekan untuk melihat thread tersebut
+
+    - melihat profile diri sendiri '/profile' dan user lain '/profile/:id' profile berisi nama, avatar dan list thread yang di miliki user tersebut
+
 
 Credits       : - UI Design inspiration: https://dribbble.com/shots/15909980-Social-Media-App-Design-Concept/attachments/7739683?mode=media
 

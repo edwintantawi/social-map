@@ -8,6 +8,8 @@ Sosial media berbasis map
 - NodeJS
 - MySQL
 - Cloudinary
+- PassportJS
+- Sequelize
 
 # Setup project
 
@@ -16,8 +18,9 @@ Sosial media berbasis map
 - Nama Database: `social_map`
 - Tabel Database:
   - `threads`
+  - `users`
 
-_untuk melakukan migrasi tabel database silahkan import file SQL pada folder `migrations` ke DBMS_
+_dapat menggunakan sequelize sync models_
 
 ## Enviroment variabels
 
@@ -42,6 +45,8 @@ _untuk melakukan migrasi tabel database silahkan import file SQL pada folder `mi
   - Menambahkan caption
 - Menampilkan thread/post dalam bentuk map bagi yang mencantumkan lokasi
   - Setiap thread/post pada map dapat di tekan untuk melihat thread/post
+- menampilkan halaman user profile
+- authentication dan authorization
 
 # Credits
 

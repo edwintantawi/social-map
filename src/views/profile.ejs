@@ -30,7 +30,7 @@
 
     <!-- MAIN:START -->
     <main class="main">
-      <% if (user.id === profileUser.id) { %>
+      <% if (user?.id === profileUser.id) { %>
       <div class="mode__wrapper">
         <div class="container mode">
           <a href="/auth/logout" class="mode-button">
@@ -46,6 +46,7 @@
             src="<%= profileUser.photo %> "
             alt="profile image"
             class="profile__image"
+            referrerpolicy="no-referrer"
           />
           <h1 class="profile__name"><%= profileUser.displayName %></h1>
         </div>
